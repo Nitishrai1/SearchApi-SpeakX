@@ -1,10 +1,12 @@
 // in this will will setup the mongodb to our mongodb compass and atlass
 const mongoose=require("mongoose");
+require('dotenv').config();
 
-const mongodb = "mongodb+srv://nitishraigkp007:64QNOF2gy9iNQSPF@searchapidb.dzcr2.mongodb.net/Questions";
+const MONGODB=process.env.mongodb
+
 const connectdb= async () =>{
     try{
-        await mongoose.connect(mongodb);
+        await mongoose.connect(MONGODB);
 
         console.log("Connection successfull");
     }catch(err){
