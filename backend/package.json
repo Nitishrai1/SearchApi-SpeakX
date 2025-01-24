@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm start",
-    "start":"node app.js"
+    "build": "npm start",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
