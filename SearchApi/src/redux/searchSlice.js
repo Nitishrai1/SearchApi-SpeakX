@@ -6,7 +6,7 @@ import axios from 'axios';
 export const fetchQuestions = createAsyncThunk(
   'search/fetchQuestions',
   async ({ query, page, questionType }) => {
-    const response = await axios.get('/api/search', {
+    const response = await axios.get('https://searchapi-speakx.onrender.com/api/questions/search', {
       params: {
         q: query,
         page: page,
@@ -22,7 +22,7 @@ export const fetchQuestions = createAsyncThunk(
 export const fetchSuggestions = createAsyncThunk(
   'search/fetchSuggestions',
   async (query) => {
-    const response = await axios.get('/api/suggestions', {
+    const response = await axios.get('https://searchapi-speakx.onrender.com/api/questions/suggestions', {
       params: { q: query },
     });
     return response.data;
