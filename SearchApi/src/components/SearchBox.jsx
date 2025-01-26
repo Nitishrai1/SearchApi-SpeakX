@@ -3,6 +3,7 @@ import { TextField, InputAdornment, ClickAwayListener } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import SuggestionList from "./SuggestionList"
 
+// eslint-disable-next-line react/prop-types
 const SearchBox = ({ onSearch, suggestions, onSelectSuggestion }) => {
   const [inputValue, setInputValue] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)

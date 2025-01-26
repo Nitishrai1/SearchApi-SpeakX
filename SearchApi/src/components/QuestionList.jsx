@@ -11,6 +11,7 @@ import {
   Chip,
 } from "@mui/material";
 
+// eslint-disable-next-line react/prop-types
 const QuestionList = ({ questions = [], filter, isLoading }) => {
   if (isLoading) {
     return (

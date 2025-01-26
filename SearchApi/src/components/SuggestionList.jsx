@@ -1,6 +1,7 @@
 
 import { List, ListItem, ListItemText, Paper } from "@mui/material"
 
+// eslint-disable-next-line react/prop-types
 const SuggestionList = ({ suggestions = [], onSelect }) => {
   if (suggestions.length === 0) return null
   // console.log(suggestions);
