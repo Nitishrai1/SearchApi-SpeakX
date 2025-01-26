@@ -19,6 +19,7 @@ class ErrorBoundary extends React.Component {
       return <h1>Something went wrong. Please try refreshing the page.</h1>
     }
 
+    // eslint-disable-next-line react/prop-types
     return this.props.children
   }
 }
