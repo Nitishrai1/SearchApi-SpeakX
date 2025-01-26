@@ -41,6 +41,22 @@ router.get("/search",checkCache, async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: "Error fetching questions", error: err });
     }
+
+});
+
+router.get('/suggestions', async (req, res) => {
+    const { q } = req.query;
+  
+    try {
+      const suggestions = await allquestions
+        .find({ title: new RegExp(q, 'i') })
+        .limit(5) // Limit the number of suggestions
+        .select('title'); // Only return the title field
+  
+      res.json({ suggestions });
+    } catch (err) {
+      res.status(500).json({ message: 'Error fetching suggestions', error: err });
+    }
 });
 
 module.exports = router;
