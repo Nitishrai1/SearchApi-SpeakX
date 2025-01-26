@@ -1,55 +1,44 @@
-import React from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Container, Box, Typography, Paper, CircularProgress } from "@mui/material"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Container, Box, Typography, Paper, CircularProgress } from "@mui/material";
 import {
   setQuery,
   setQuestionType,
-  setPage,
   fetchQuestions,
-  fetchSuggestions,
   clearQuestions,
-} from "./redux/searchSlice"
-import SearchBox from "./components/SearchBox"
-import QuestionList from "./components/QuestionList"
-import Filter from "./components/Filter"
-import PaginationComponent from "./components/Pagination"
-import ErrorBoundary from "./components/ErrorBoundary"
+} from "./redux/searchSlice";
+import SearchBox from "./components/SearchBox";
+import QuestionList from "./components/QuestionList";
+import Filter from "./components/Filter";
+import PaginationComponent from "./components/Pagination";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
-  const dispatch = useDispatch()
-  const { query, questions, suggestions, questionType, page, totalPages, status } = useSelector((state) => state.search)
+  const dispatch = useDispatch();
+  const { query, questions, questionType, status } = useSelector((state) => state.search);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (query) {
-      dispatch(fetchQuestions({ query, page, questionType }))
-      dispatch(fetchSuggestions(query))
+      dispatch(fetchQuestions({ query, page: 1, questionType: '' })); // Fetch all types initially
     } else {
-      dispatch(clearQuestions())
+      dispatch(clearQuestions());
     }
-  }, [query, page, questionType, dispatch])
+  }, [query, dispatch]);
 
   const handleSelectSuggestion = (suggestion) => {
-    dispatch(setQuery(suggestion.title))
-  }
-
-  const handlePageChange = (newPage) => {
-    dispatch(setPage(newPage))
-  }
+    dispatch(setQuery(suggestion.title));
+  };
 
   const handleSearch = (q) => {
-    dispatch(setQuery(q))
+    dispatch(setQuery(q));
     if (!q) {
-      dispatch(clearQuestions())
+      dispatch(clearQuestions());
     }
-  }
+  };
 
   const handleFilterChange = (type) => {
-    dispatch(setQuestionType(type))
-    dispatch(setPage(1))
-    if (query) {
-      dispatch(fetchQuestions({ query, page: 1, questionType: type }))
-    }
-  }
+    dispatch(setQuestionType(type));
+  };
 
   return (
     <ErrorBoundary>
@@ -59,7 +48,7 @@ const App = () => {
             ANS Search API
           </Typography>
           <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
-            <SearchBox onSearch={handleSearch} suggestions={suggestions} onSelectSuggestion={handleSelectSuggestion} />
+            <SearchBox onSearch={handleSearch} onSelectSuggestion={handleSelectSuggestion} />
             <Filter questionType={questionType} onFilterChange={handleFilterChange} />
           </Paper>
           {status === "loading" && (
@@ -67,17 +56,11 @@ const App = () => {
               <CircularProgress />
             </Box>
           )}
-          <QuestionList questions={questions} isLoading={status === "loading"} />
-          {questions.length > 0 && (
-            <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-              <PaginationComponent page={page} totalPages={totalPages} onPageChange={handlePageChange} />
-            </Box>
-          )}
+          <QuestionList questions={questions} filter={questionType} isLoading={status === "loading"} />
         </Box>
       </Container>
     </ErrorBoundary>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;

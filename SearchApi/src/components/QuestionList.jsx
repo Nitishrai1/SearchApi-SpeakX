@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Table,
   TableBody,
@@ -9,23 +9,28 @@ import {
   Paper,
   Typography,
   Chip,
-} from "@mui/material"
+} from "@mui/material";
 
-const QuestionList = ({ questions = [], isLoading }) => {
+const QuestionList = ({ questions = [], filter, isLoading }) => {
   if (isLoading) {
     return (
       <Typography variant="h6" align="center" sx={{ my: 4 }}>
         Loading...
       </Typography>
-    )
+    );
   }
 
-  if (questions.length === 0) {
+  const filteredQuestions = questions.filter((question) => {
+    if (filter === "") return true; // Show all if no filter is selected
+    return question.type === filter;
+  });
+
+  if (filteredQuestions.length === 0) {
     return (
       <Typography variant="h6" align="center" sx={{ my: 4 }}>
         No questions found. Try a different search query or filter.
       </Typography>
-    )
+    );
   }
 
   return (
@@ -39,7 +44,7 @@ const QuestionList = ({ questions = [], isLoading }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {questions.map((question, index) => (
+          {filteredQuestions.map((question, index) => (
             <TableRow key={index}>
               <TableCell>{question.title}</TableCell>
               <TableCell>
@@ -82,8 +87,7 @@ const QuestionList = ({ questions = [], isLoading }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  )
-}
+  );
+};
 
-export default QuestionList
-
+export default QuestionList;
