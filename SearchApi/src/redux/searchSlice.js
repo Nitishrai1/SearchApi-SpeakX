@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 const api_url=import.meta.env.VITE_API_URL;
 
+
+// this function is to get the data for the seach
 export const fetchQuestions = createAsyncThunk("search/fetchQuestions", async ({ query, page, questionType }) => {
   const response = await axios.get(`${api_url}/search`, {
     params: {
@@ -13,7 +15,7 @@ export const fetchQuestions = createAsyncThunk("search/fetchQuestions", async ({
   })
   return response.data
 })
-
+// this funciton is to get the data for the suggestion
 export const fetchSuggestions = createAsyncThunk("search/fetchSuggestions", async (query) => {
   const response = await axios.get(`${api_url}/suggestions`, {
     params: { q: query },
