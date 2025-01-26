@@ -61,7 +61,7 @@ const App = () => {
       <Container maxWidth="lg">
         <Box sx={{ my: 4 }}>
           <Typography variant="h3" component="h1" gutterBottom align="center">
-            ANS Search API
+            Question Search 
           </Typography>
           <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
             <SearchBox
