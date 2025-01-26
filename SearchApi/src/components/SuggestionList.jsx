@@ -1,4 +1,4 @@
-import React from "react"
+
 import { List, ListItem, ListItemText, Paper } from "@mui/material"
 
 const SuggestionList = ({ suggestions = [], onSelect }) => {

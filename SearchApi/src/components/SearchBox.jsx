@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
+import  { useState, useEffect, useRef } from "react"
 import { TextField, InputAdornment, ClickAwayListener } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import SuggestionList from "./SuggestionList"
@@ -59,5 +59,5 @@ const SearchBox = ({ onSearch, suggestions, onSelectSuggestion }) => {
   )
 }
 
-export default SearchBox
+export default SearchBox;
 

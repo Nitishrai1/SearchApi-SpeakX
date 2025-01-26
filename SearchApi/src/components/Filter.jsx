@@ -1,4 +1,4 @@
-import React from "react"
+
 import { FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material"
 
 const Filter = ({ questionType, onFilterChange }) => {
