@@ -45,12 +45,12 @@ const QuestionList = ({ questions = [], isLoading }) => {
               <TableCell>
                 <Chip
                   label={question.type}
-                  color={question.type === "MCQ" ? "primary" : "secondary"}
+                  color={question.type === "MCQ" ? "primary" : question.type === "ANAGRAM" ? "secondary" : "default"}
                   variant="outlined"
                 />
               </TableCell>
               <TableCell>
-                {question.type === "MCQ" ? (
+                {question.type === "MCQ" && question.blocks && (
                   <ul style={{ paddingLeft: "20px" }}>
                     {question.blocks.map((block, idx) => (
                       <li key={idx}>
@@ -58,12 +58,23 @@ const QuestionList = ({ questions = [], isLoading }) => {
                       </li>
                     ))}
                   </ul>
-                ) : (
+                )}
+                {question.type === "ANAGRAM" && question.blocks && (
                   <ul style={{ paddingLeft: "20px" }}>
                     {question.blocks.map((block, idx) => (
                       <li key={idx}>{block.text}</li>
                     ))}
                   </ul>
+                )}
+                {question.type === "READ_ALONG" && question.blocks && question.blocks[0] && (
+                  <div>
+                    <p>
+                      <strong>Text:</strong> {question.blocks[0].text}
+                    </p>
+                    <p>
+                      <strong>Audio:</strong> {question.blocks[0].audio}
+                    </p>
+                  </div>
                 )}
               </TableCell>
             </TableRow>

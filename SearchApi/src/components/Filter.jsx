@@ -10,7 +10,8 @@ const Filter = ({ questionType, onFilterChange }) => {
       <RadioGroup row value={questionType} onChange={(e) => onFilterChange(e.target.value)}>
         <FormControlLabel value="" control={<Radio />} label="All" />
         <FormControlLabel value="MCQ" control={<Radio />} label="MCQ" />
-        <FormControlLabel value="Anagram" control={<Radio />} label="Anagram" />
+        <FormControlLabel value="ANAGRAM" control={<Radio />} label="Anagram" />
+        <FormControlLabel value="READ_ALONG" control={<Radio />} label="Read Along" />
       </RadioGroup>
     </FormControl>
   )

@@ -13,6 +13,7 @@ import SearchBox from "./components/SearchBox"
 import QuestionList from "./components/QuestionList"
 import Filter from "./components/Filter"
 import PaginationComponent from "./components/Pagination"
+import ErrorBoundary from "./components/ErrorBoundary"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -51,28 +52,30 @@ const App = () => {
   }
 
   return (
-    <Container maxWidth="lg">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h3" component="h1" gutterBottom align="center">
-          ANS Search API
-        </Typography>
-        <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
-          <SearchBox onSearch={handleSearch} suggestions={suggestions} onSelectSuggestion={handleSelectSuggestion} />
-          <Filter questionType={questionType} onFilterChange={handleFilterChange} />
-        </Paper>
-        {status === "loading" && (
-          <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-            <CircularProgress />
-          </Box>
-        )}
-        <QuestionList questions={questions} isLoading={status === "loading"} />
-        {questions.length > 0 && (
-          <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
-            <PaginationComponent page={page} totalPages={totalPages} onPageChange={handlePageChange} />
-          </Box>
-        )}
-      </Box>
-    </Container>
+    <ErrorBoundary>
+      <Container maxWidth="lg">
+        <Box sx={{ my: 4 }}>
+          <Typography variant="h3" component="h1" gutterBottom align="center">
+            ANS Search API
+          </Typography>
+          <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+            <SearchBox onSearch={handleSearch} suggestions={suggestions} onSelectSuggestion={handleSelectSuggestion} />
+            <Filter questionType={questionType} onFilterChange={handleFilterChange} />
+          </Paper>
+          {status === "loading" && (
+            <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+              <CircularProgress />
+            </Box>
+          )}
+          <QuestionList questions={questions} isLoading={status === "loading"} />
+          {questions.length > 0 && (
+            <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
+              <PaginationComponent page={page} totalPages={totalPages} onPageChange={handlePageChange} />
+            </Box>
+          )}
+        </Box>
+      </Container>
+    </ErrorBoundary>
   )
 }
 

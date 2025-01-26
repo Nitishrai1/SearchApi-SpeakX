@@ -5,10 +5,10 @@ const SuggestionList = ({ suggestions = [], onSelect }) => {
   if (suggestions.length === 0) return null
 
   return (
-    <Paper elevation={3} sx={{ position: "absolute", zIndex: 1, width: "100%", maxHeight: 200, overflowY: "auto" }}>
+    <Paper style={{ position: "absolute", zIndex: 1, width: "100%" }}>
       <List>
         {suggestions.map((suggestion, index) => (
-          <ListItem button key={index} onClick={() => onSelect(suggestion)}>
+          <ListItem key={index} onClick={() => onSelect(suggestion)}>
             <ListItemText primary={suggestion.title} />
           </ListItem>
         ))}
