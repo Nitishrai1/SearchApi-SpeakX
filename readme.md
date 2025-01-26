@@ -1,3 +1,42 @@
+Through GRPC
+
+Tried to implement the the connection with GRPC able to make the backend part but cant able to integrate with react
+
+
+Start MongoDB: Ensure MongoDB is running on your local machine.
+
+Run gRPC Server
+
+BASH
+
+cd backend
+node src/server.js
+Frontend
+Compile Protobuf Files
+
+Navigate to the directory containing your .proto file and run:
+
+BASH
+
+cd src/proto
+protoc -I=. --js_out=import_style=commonjs:. --grpc-web_out=import_style=commonjs,mode=grpcwebtext:. question.proto
+Start React App
+
+BASH
+
+cd ../
+npm start
+Usage
+Describe how to use the application.
+Example: Click "Fetch Questions" to retrieve data.
+Troubleshooting
+Common issues and solutions.
+Example: Port conflicts, missing dependencies
+
+
+####################################################################
+
+Through REST 
 FrontEnd part
 
 Collapse
