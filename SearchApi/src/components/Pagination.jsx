@@ -1,17 +1,19 @@
-import React from 'react';
-import { Pagination } from '@mui/material';
+import React from "react"
+import { Pagination } from "@mui/material"
 
 const PaginationComponent = ({ page, totalPages, onPageChange }) => {
   return (
     <Pagination
       count={totalPages}
       page={page}
-      onChange={(_, value) => onPageChange(value)}
+      onChange={(event, value) => onPageChange(value)}
       color="primary"
-      variant="outlined"
-      shape="rounded"
+      size="large"
+      showFirstButton
+      showLastButton
     />
-  );
-};
+  )
+}
 
-export default PaginationComponent;
+export default PaginationComponent
+
