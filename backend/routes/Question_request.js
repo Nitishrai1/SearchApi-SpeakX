@@ -44,6 +44,8 @@ router.get("/search",checkCache, async (req, res) => {
 
 });
 
+
+// this route is for the suggestion of the search feild
 router.get('/suggestions', async (req, res) => {
     const { q } = req.query;
   
