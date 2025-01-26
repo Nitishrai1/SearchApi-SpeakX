@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchQuestions = createAsyncThunk("search/fetchQuestions", async ({ query, page, questionType }) => {
-  const response = await axios.get("https://searchapi-speakx.onrender.com/api/questions/search", {
+  const response = await axios.get(`${apiUrl}/search`, {
     params: {
       q: query,
       page: page,
@@ -14,7 +15,7 @@ export const fetchQuestions = createAsyncThunk("search/fetchQuestions", async ({
 })
 
 export const fetchSuggestions = createAsyncThunk("search/fetchSuggestions", async (query) => {
-  const response = await axios.get("https://searchapi-speakx.onrender.com/api/questions/suggestions", {
+  const response = await axios.get(`${apiUrl}/suggestions`, {
     params: { q: query },
   })
   return response.data
