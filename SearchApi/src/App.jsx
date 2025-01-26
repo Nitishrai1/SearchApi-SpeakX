@@ -4,11 +4,12 @@ import { Container, Box, Typography, Paper, CircularProgress } from '@mui/materi
 import {
   setQuery,
   setQuestionType,
+  setPage,
   fetchQuestions,
   fetchSuggestions,
   clearQuestions,
 } from './redux/searchSlice';
-import SearchBox from './components/searchBox';
+import SearchBox from './components/SearchBox';
 import QuestionList from './components/QuestionList';
 import Filter from './components/Filter';
 import PaginationComponent from './components/Pagination';
@@ -29,12 +30,12 @@ const App = () => {
 
   useEffect(() => {
     if (query) {
-      dispatch(fetchQuestions({ query, page: 1, questionType: '' })); // Initial fetch
-      dispatch(fetchSuggestions(query)); // Fetch suggestions
+      dispatch(fetchQuestions({ query, page, questionType }));
+      dispatch(fetchSuggestions(query));
     } else {
       dispatch(clearQuestions());
     }
-  }, [query, dispatch]);
+  }, [query, page, questionType, dispatch]);
 
   const handleSelectSuggestion = (suggestion) => {
     dispatch(setQuery(suggestion.title));
@@ -49,6 +50,10 @@ const App = () => {
 
   const handleFilterChange = (type) => {
     dispatch(setQuestionType(type));
+  };
+
+  const handlePageChange = (newPage) => {
+    dispatch(setPage(newPage));
   };
 
   return (
@@ -79,10 +84,11 @@ const App = () => {
           <QuestionList questions={questions} filter={questionType} isLoading={status === 'loading'} />
           {questions.length > 0 && totalPages > 1 && (
             <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
-              <PaginationComponent page={page} totalPages={totalPages} onPageChange={(newPage) => {
-                dispatch(setPage(newPage));
-                dispatch(fetchQuestions({ query, page: newPage, questionType }));
-              }}/>
+              <PaginationComponent
+                page={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </Box>
           )}
         </Box>
