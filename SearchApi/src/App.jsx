@@ -9,7 +9,7 @@ import {
   fetchSuggestions,
   clearQuestions,
 } from './redux/searchSlice';
-import SearchBox from './components/SearchBox';
+import SearchBox from './components/searchBox';';
 import QuestionList from './components/QuestionList';
 import Filter from './components/Filter';
 import PaginationComponent from './components/Pagination';
