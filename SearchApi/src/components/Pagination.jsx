@@ -1,8 +1,9 @@
-
-import { Pagination } from "@mui/material"
+import { Pagination, useTheme } from "@mui/material"
 
 // eslint-disable-next-line react/prop-types
 const PaginationComponent = ({ page, totalPages, onPageChange }) => {
+  const theme = useTheme()
+
   return (
     <Pagination
       count={totalPages}
@@ -12,6 +13,11 @@ const PaginationComponent = ({ page, totalPages, onPageChange }) => {
       size="large"
       showFirstButton
       showLastButton
+      sx={{
+        "& .MuiPaginationItem-root": {
+          color: theme.palette.text.primary,
+        },
+      }}
     />
   )
 }

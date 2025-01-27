@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableBody,
@@ -9,45 +8,43 @@ import {
   Paper,
   Typography,
   Chip,
-} from "@mui/material";
+  useTheme,
+} from "@mui/material"
 
 // eslint-disable-next-line react/prop-types
-const QuestionList = ({ questions = [], filter, isLoading }) => {
+const QuestionList = ({ questions = [], isLoading }) => {
+  const theme = useTheme()
+
   if (isLoading) {
     return (
-      <Typography variant="h6" align="center" sx={{ my: 4 }}>
+      <Typography variant="h6" align="center" sx={{ my: 4, color: theme.palette.text.primary }}>
         Loading...
       </Typography>
-    );
+    )
   }
 
-  const filteredQuestions = questions.filter((question) => {
-    if (filter === "") return true; // Show all if no filter is selected
-    return question.type === filter;
-  });
-
-  if (filteredQuestions.length === 0) {
+  if (questions.length === 0) {
     return (
-      <Typography variant="h6" align="center" sx={{ my: 4 }}>
+      <Typography variant="h6" align="center" sx={{ my: 4, color: theme.palette.text.primary }}>
         No questions found. Try a different search query or filter.
       </Typography>
-    );
+    )
   }
 
   return (
-    <TableContainer component={Paper} elevation={3}>
+    <TableContainer component={Paper} elevation={3} sx={{ bgcolor: theme.palette.background.paper }}>
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Title</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Options/Blocks</TableCell>
+            <TableCell sx={{ color: theme.palette.text.primary }}>Title</TableCell>
+            <TableCell sx={{ color: theme.palette.text.primary }}>Type</TableCell>
+            <TableCell sx={{ color: theme.palette.text.primary }}>Options/Blocks</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {filteredQuestions.map((question, index) => (
+          {questions.map((question, index) => (
             <TableRow key={index}>
-              <TableCell>{question.title}</TableCell>
+              <TableCell sx={{ color: theme.palette.text.primary }}>{question.title}</TableCell>
               <TableCell>
                 <Chip
                   label={question.type}
@@ -55,7 +52,7 @@ const QuestionList = ({ questions = [], filter, isLoading }) => {
                   variant="outlined"
                 />
               </TableCell>
-              <TableCell>
+              <TableCell sx={{ color: theme.palette.text.primary }}>
                 {question.type === "MCQ" && question.blocks && (
                   <ul style={{ paddingLeft: "20px" }}>
                     {question.blocks.map((block, idx) => (
@@ -88,7 +85,8 @@ const QuestionList = ({ questions = [], filter, isLoading }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-};
+  )
+}
 
-export default QuestionList;
+export default QuestionList
+

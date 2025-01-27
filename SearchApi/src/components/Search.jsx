@@ -1,5 +1,5 @@
 import  { useState, useEffect, useRef } from "react"
-import { TextField, InputAdornment, ClickAwayListener } from "@mui/material"
+import { TextField, InputAdornment, ClickAwayListener, useTheme } from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import SuggestionList from "./SuggestionList"
 
@@ -8,6 +8,7 @@ const SearchBox = ({ onSearch, suggestions, onSelectSuggestion }) => {
   const [inputValue, setInputValue] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
   const inputRef = useRef(null)
+  const theme = useTheme()
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -53,6 +54,22 @@ const SearchBox = ({ onSearch, suggestions, onSelectSuggestion }) => {
               </InputAdornment>
             ),
           }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: theme.palette.text.secondary,
+              },
+              "&:hover fieldset": {
+                borderColor: theme.palette.text.primary,
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: theme.palette.primary.main,
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: theme.palette.text.secondary,
+            },
+          }}
         />
         {showSuggestions && <SuggestionList suggestions={suggestions} onSelect={handleSuggestionSelect} />}
       </div>
@@ -60,5 +77,5 @@ const SearchBox = ({ onSearch, suggestions, onSelectSuggestion }) => {
   )
 }
 
-export default SearchBox;
+export default SearchBox
 
